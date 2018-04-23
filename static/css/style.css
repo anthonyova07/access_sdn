@@ -1,0 +1,244 @@
+body
+{
+    background:#0178D6 url(/static/res/background.jpg) no-repeat center right;
+    font-family: arial, verdana;
+    font-size: 12pt;
+    color: #333333;
+    height: 100%;
+    background-size:90%;
+    
+}
+
+h5
+{
+    margin: 0;
+    padding: 0;
+}
+.container
+{
+    /*background: rgba(0,120,215,0.3);*/
+    width: 60%;
+    min-width: 800px;
+    height: 300px;
+    position: relative;
+    top: 30%;
+    text-align: center;
+}
+input[type=text]
+{
+    width: 250px;
+    height: 45px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 12pt;
+    color: #333;
+    padding-left: 10px;
+}
+
+input[type=password]
+{
+    width: 250px;
+    height: 45px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 12pt;
+    color: #333;
+    padding-left: 10px;
+    
+}
+
+input[type=submit]
+{
+    background: #ffba00;
+    border:none;
+    border-radius: 5px;
+    width: 250px;
+    height: 45px;
+    margin: 5px 13px 0 16px ;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+}
+.login_button
+{
+    background: #ffba00;
+    border:none;
+    border-radius: 5px;
+    width: 128px !important;
+    height: 40px;
+    margin: 5px 13px 0 0 !important ;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+}
+.logo
+{
+    height: 80px;
+    background: #077fde;
+    padding: 10px;
+    margin: 0;
+}
+
+.success_msg
+{
+    font-size: 24pt; 
+    color: green;
+    font-family: arial;
+    font-weight: normal;
+    margin-top: 5%;
+}
+.failure_msg
+{
+    font-size: 24pt; 
+    color: red;
+    font-family: arial;
+    font-weight: normal;
+    margin-top: 5%;
+}
+.main
+{
+	width:100% !important;
+	margin:auto;
+}
+.left_section
+{
+	width:22%;
+	/*margin-top:5%;*/
+	float:left;
+	display:inline-block;
+	overflow:hidden;
+	text-align:center;
+	border-right:1px solid #999999;
+	padding:5px;
+}
+
+.right_section
+{
+	width:76%;
+	/*margin-top:5%;*/
+	float:left;
+	display:inline-block;
+	overflow:auto;
+	text-align:center;
+}
+
+.add_user_list
+{
+	border-top:1px solid #d8d8d8;
+	border-right:1px solid #d8d8d8;
+	padding:10px;
+	background:#efefef;
+        font-size: 10px;
+        color: #333333;
+}
+.add_user_addedlist
+{
+	border-top:1px solid #d8d8d8;
+	border-right:1px solid #d8d8d8;
+	padding:10px;
+}
+.sd_button
+{
+	background: #0051a7;
+    border:none;
+    border-radius: 5px;
+    width: 400px;
+    height: 40px;
+    margin: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.left_section h4
+{
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    width: 100px;
+    border: 1px solid red;
+    display: inline-block;
+    overflow: auto;
+    height: 35px;
+}
+
+.left_section ul
+{
+    list-style-type: none;
+    border: 0px solid red;
+    display: inline-block;
+    height: 90px;
+    margin: 4px;
+    overflow: auto;
+}
+.left_section li
+{
+    display: inline-block;
+    height: 45px;
+    line-height: 40px;
+    position:relative;
+    left:-27px;   
+}
+
+.left_section button
+{
+    width: 250px;
+    height: 45px;
+    margin: 5px 0 0 34px;
+    background: #ccc;
+    border-radius: 5px;
+    border:none;
+    font-size: 14px;
+    color:#333333;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+
+}
+.add_button
+{
+    width: 300px;
+    height: 45px;
+    margin: 5px;
+    background: #ccc;
+    border-radius: 5px;
+    border:none;
+    font-size: 14px;
+
+    color:#333333;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    top:-69px;
+    left:436px;
+    text-transform: uppercase;
+
+}
+
+.mtitles{
+    width: 310px; 
+    height:34px;
+    font-size: 12pt;
+}
+
+select
+{
+    width: 250px;
+    height: 45px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 12pt;
+    color: #333;
+    padding-left: 10px;
+    background: #fcfcfc;
+}
