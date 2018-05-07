@@ -42,20 +42,20 @@
                 <div class="input-group-prepend">
                     <span class="input-group-date">Desde: </span>
     </div>
-    <input class="input-group-date" id="time_desde" type="datetime-local" placeholder="in secs" name="evict_time_desde" value="{{request.form.evict_time_desde }}">
+    <input class="input-group-date" id="time_desde" type="datetime-local" name="evict_time_desde" value="{{request.form.evict_time_desde }}">
     </div>
 
     <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-date">Hasta: </span>
         </div>
-        <input class="input-group-date" id="time_hasta" type="datetime-local" placeholder="in secs" name="evict_time" value="{{request.form.evict_time_hasta }}">
+        <input class="input-group-date" id="time_hasta" type="datetime-local" name="evict_time_hasta" value="{{request.form.evict_time_hasta }}">
     </div>
 
 
 
     <div class="form-group">
-        <input class="btn btn-default" type="submit" value="Add User">
+        <input class="btn btn-default" type="submit" value="Add Request">
     </div>
     </form>
 
@@ -63,6 +63,15 @@
     </div>
 
 
+    <script>
+        var sendData = function() {
+            var tiemdesde = document.getElementById("time_desde");
+            var tiemhasta = document.getElementById("time_hasta");
+
+            console.log(tiemdesde);
+            tiemdesde.value = "Heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeyyyy";
+        }
+    </script>
 
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>

@@ -129,6 +129,13 @@ input[type=submit] {
     color: #333333;
 }
 
+.border_cell {
+    border-top: 1px solid #333333;
+    border-right: 1px solid #333333;
+    padding: 10px;
+    font-size: 10px;
+}
+
 .add_user_addedlist {
     border-top: 1px solid #d8d8d8;
     border-right: 1px solid #d8d8d8;

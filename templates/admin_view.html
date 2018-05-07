@@ -15,27 +15,29 @@
     <br>
     <div class="main">
 
+        <table id="request_table" class="table table-hover table-sm table-striped">
 
-        <span class="right_section">
-        <table class="table table-hover table-sm table-striped">
+            <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
+            <thead>
+                <tr>
+                    <th id="user">user</th>
+                    <th id="solicitud">request url</th>
+                    <th id="motivo">motivo</th>
+                    <th id="tiempodesde">Evict time desde</th>
+                    <th id="tiempohasta">Evict time hasta</th>
+                </tr>
+            </thead>
+            <tbody class="col-md-12" id="body-solicitud">
+                <tr>
+                    <td class="col-md-2">Jose</td>
+                    <td class="col-md-2">youtube</td>
+                    <td class="col-md-2">quiero entrar</td>
+                    <td class="col-md-2" value="Date.getTime()">mi tiempo</td>
+                    <td class="col-md-2">Hasta este mismo tiempo</td>
 
-                <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
-         <thead>
-            <tr>
-               <th id="user"class="add_user_list col-5">user</th>
-               <th id="solicitud" class="add_user_list col-5">request url</th>
-               <th id="motivo" class="add_user_list col-5">motivo</th>
-               <th id="tiempodesde" class="add_user_list col-5">Evict time desde</th>       
-                <th id="tiempohasta" class="add_user_list col-5">Evict time hasta</th>
-
-<!--                <th>Pin</th> -->
-            </tr>
-         </thead>
-            <tbody id="body-solicitud">
-                
-                </tbody>
+                </tr>
+            </tbody>
         </table>
-    </span>
 
 
     </div>
@@ -49,43 +51,75 @@
             var datos = JSON.parse(e.data);
             console.log("Los datos son:", datos)
                 // Find a <table> element with id="myTable":
-            var table = document.getElementById("body-solicitud");
+            var table = document.getElementById("request_table");
+            var arrdatos = [datos.user, datos.pagina, datos.motivo, datos.tiempodesde, datos.tiempohasta]
 
-            // Create an empty <tr> element and add it to the 1st position of the table:
-            var row = table.insertRow(0);
-
-            // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
+            var tr = document.createElement("tr");
 
 
-            // cell1.classList.add("add_user_addedlist");
-            // cell2.classList.add("add_user_addedlist");
-            // cell3.classList.add("add_user_addedlist");
-            // cell3.classList.add("add_user_addedlist");
-            // cell4.classList.add("add_user_addedlist");
 
-            cell1.classList.add("col-5");
-            cell2.classList.add("col-5");
-            cell3.classList.add("col-5");
-            cell4.classList.add("col-5");
+            arrdatos.forEach(element => {
+                var txt = document.createTextNode(element);
+                var td = document.createElement("td");
+                td.appendChild(txt);
+                tr.appendChild(td);
+            });
 
-            tiempodesde = new Date(datos.tiempodesde);
-            tiempohasta = new Date(datos.tiempohasta);
+            table.appendChild(tr);
+            console.log('------------------------------------');
+            console.log();
+            console.log('------------------------------------');
 
-            // Add some text to the new cells:
-            cell1.innerHTML = datos.user;
-            cell2.innerHTML = datos.pagina;
-            cell3.innerHTML = datos.motivo;
-            cell4.innerHTML = tiempodesde;
-            cell5.innerHTML = tiempohasta;
+            var comentarios = {
+                // // // Add some text to the new cells:
+                // // cell1.innerHTML = datos.user;
+                // // cell2.innerHTML = datos.pagina;
+                // // cell3.innerHTML = datos.motivo;
+                // // cell4.innerHTML = tiempodesde;
+                // // cell5.innerHTML = tiempohasta;
+                // var txt = document.createTextNode(datos.user);
+                // var td = document.createElement("td");
 
-            // cell4.innerHTML = '<button type="button" class="btn btn-outline-success">Aceptar</button>' + '<button type="button" class="btn btn-danger">Danger</button>'
+
+                // td.appendChild(txt);
+                // tr.appendChild(td);
+                // table.appendChild(tr)
+                // // Create an empty <tr> element and add it to the 1st position of the table:
+                // var row = table.insertRow(1);
+
+                // // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+                // var cell1 = row.insertCell(0);
+                // var cell2 = row.insertCell(1);
+                // var cell3 = row.insertCell(2);
+                // var cell4 = row.insertCell(3);
+                // var cell5 = row.insertCell(4);
 
 
+                // // cell1.classList.add("add_user_addedlist");
+                // // cell2.classList.add("add_user_addedlist");
+                // // cell3.classList.add("add_user_addedlist");
+                // // cell3.classList.add("add_user_addedlist");
+                // // cell4.classList.add("add_user_addedlist");
+
+                // cell1.classList.add("col-md-2");
+                // cell2.classList.add("col-md-2");
+                // cell3.classList.add("col-md-2");
+                // cell4.classList.add("col-md-2");
+                // cell5.classList.add("col-md-2");
+
+                // tiempodesde = new Date(datos.tiempodesde);
+                // tiempohasta = new Date(datos.tiempohasta);
+
+                // // Add some text to the new cells:
+                // cell1.innerHTML = datos.user;
+                // cell2.innerHTML = datos.pagina;
+                // cell3.innerHTML = datos.motivo;
+                // cell4.innerHTML = tiempodesde;
+                // cell5.innerHTML = tiempohasta;
+
+                // // cell4.innerHTML = '<button type="button" class="btn btn-outline-success">Aceptar</button>' + '<button type="button" class="btn btn-danger">Danger</button>'
+
+            }
 
 
         };

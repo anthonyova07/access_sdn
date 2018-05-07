@@ -37,8 +37,8 @@ app = Flask(__name__)
 # Global variable
 success_string=""
 sdnController=""
-solicitudes=[{'user':'user1','pagina': 'mipagina', 'motivo':'Quiero entrar', 'tiempodesde' : 1525849320000, 'tiempohasta':1525849320000 }, {'user':'use3443','pagina': 'mipagina', 'motivo':'Quiero ver', 'tiempodesde' : 1525849320000, 'tiempohasta': 1525849320000}]
-
+# solicitudes=[{'user':'user1','pagina': 'mipagina', 'motivo':'Quiero entrar', 'tiempodesde' : 1525849320000, 'tiempohasta':1525849320000 }, {'user':'use3443','pagina': 'mipagina', 'motivo':'Quiero ver', 'tiempodesde' : 1525849320000, 'tiempohasta': 1525849320000}]
+solicitudes=[]
 @app.route('/user_view/<user>',methods=['GET', 'POST'])
 def userView(user):
     if request.method == 'GET':
@@ -50,18 +50,24 @@ def userView(user):
         motivo = str(request.form['motivo'])
         print motivo
         print usuario
+        print request.form['evict_time_desde']
+        print request.form['evict_time_hasta']
         
+        evict_time_desde = request.form['evict_time_desde']
+        evict_time_hasta = request.form['evict_time_hasta']
+
+        print evict_time_desde
         # evict_time_desde = str(request.form['evict_time_desde'])
         # evict_time_hasta = str(request.form['evict_time_hasta'])
-        evict_time_desde = str(1525541016671)
-        evict_time_hasta = str(1525541056671)
+        # evict_time_desde = str(1525541016671)
+        # evict_time_hasta = str(1525541056671)
 
         # if not evict_time:
         #     evict_time_int = 0
         # else:
         #     evict_time_int = int(evict_time)
         status = "Offline"
-        item = {'user': str(usuario),'pagina': str(pagina), 'motivo':str(motivo),'tiempodesde':int(evict_time_desde),'tiempohasta':int(evict_time_hasta)}
+        item = {'user': str(usuario),'pagina': str(pagina), 'motivo':str(motivo),'tiempodesde':evict_time_desde,'tiempohasta':evict_time_hasta}
         solicitudes.append(item)
         items = solicitudes
 
@@ -265,6 +271,8 @@ def getDeviceType(environ_dict):
         device = "Android"
     elif 'Windows' in environ_dict['HTTP_USER_AGENT']:
         device = "Windows"
+    elif 'Elementary' in environ_dict['HTTP_USER_AGENT']:
+        device = "Elementary"
     else:
         device = "unknown"
     return device
