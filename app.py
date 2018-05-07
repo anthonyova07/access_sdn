@@ -48,30 +48,17 @@ def userView(user):
         usuario = str(user)
         pagina = str(request.form['direccionurl'])
         motivo = str(request.form['motivo'])
-        print motivo
-        print usuario
-        print request.form['evict_time_desde']
-        print request.form['evict_time_hasta']
-        
+        print type(request.form)
         evict_time_desde = request.form['evict_time_desde']
         evict_time_hasta = request.form['evict_time_hasta']
-
         print evict_time_desde
-        # evict_time_desde = str(request.form['evict_time_desde'])
-        # evict_time_hasta = str(request.form['evict_time_hasta'])
-        # evict_time_desde = str(1525541016671)
-        # evict_time_hasta = str(1525541056671)
-
-        # if not evict_time:
-        #     evict_time_int = 0
-        # else:
-        #     evict_time_int = int(evict_time)
         status = "Offline"
-        item = {'user': str(usuario),'pagina': str(pagina), 'motivo':str(motivo),'tiempodesde':evict_time_desde,'tiempohasta':evict_time_hasta}
+        item = {'user': str(usuario),'direccionurl': str(pagina), 'motivo':str(motivo),'tiempodesde':evict_time_desde,'tiempohasta':evict_time_hasta}
         solicitudes.append(item)
         items = solicitudes
-
-        return render_template('user_request_view.html',usuario=user)
+        result = request.form
+        items ={'item': item, 'items':items}
+        return render_template('user_request_view.html',items=items)
 
 
 @app.route('/admin_view',methods=['GET', 'POST'])

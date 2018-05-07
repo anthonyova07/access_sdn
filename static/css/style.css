@@ -134,6 +134,9 @@ input[type=submit] {
     border-right: 1px solid #333333;
     padding: 10px;
     font-size: 10px;
+    background: #efefef;
+    font-size: 10px;
+    color: #efefef;
 }
 
 .add_user_addedlist {

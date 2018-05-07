@@ -3,6 +3,9 @@
 <head>
     <title>SDN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" media="screen">
 
@@ -18,7 +21,7 @@
     <br>
     <div class="main">
         <span class="left_section">
-            <h3>{{usuario}}</h3>
+           
             <br>
       
             <form action="" method="post" style="text-align:left;">
@@ -36,7 +39,7 @@
                 </div>
                 <div class="form-group align-content-center h3">
                         <label for="exampleFormControlInput1">Evict Time</label>
-                    </div>
+                </div>
 
                 <div class="input-group">
                 <div class="input-group-prepend">
@@ -52,26 +55,88 @@
         <input class="input-group-date" id="time_hasta" type="datetime-local" name="evict_time_hasta" value="{{request.form.evict_time_hasta }}">
     </div>
 
-
-
     <div class="form-group">
         <input class="btn btn-default" type="submit" value="Add Request">
     </div>
     </form>
 
     </span>
+    <span class="right_section">  
+
+            <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" href="#solicitudes">Lista de solicitudes</a></li>
+                    <li><a data-toggle="tab" href="#historial">Pendiente</a></li>
+                  </ul>
+            <div class="tab-content">
+
+                <div id="solicitudes" class="tab-pane fade" >
+                    <table id="request_table" class="table table-hover table-bordered table-sm ">
+    
+                            <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
+                            <thead>
+                                <tr>
+                                    <th class="add_user_list" width="20%" scope="col" id="user">user</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="direccionurl">request url</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="motivo">motivo</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="tiempodesde">Evict time desde</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for item in items['items'] %}
+                                    <tr>
+                                            <td class="add_user_addedlist">{{ item['user'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['direccionurl'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['motivo'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['tiempodesde'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['tiempohasta'] }}</td>
+                                    
+                                    </tr>
+                                    {% endfor %}
+    
+    
+                            </tbody>
+                    </table>
+
+                </div>
+                <div id="historial" class="tab-pane fade " >
+                        <table id="request_table" class="table table-hover table-bordered table-sm ">
+        
+                                <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
+                                <thead>
+                                    <tr>
+                                        <th class="add_user_list" width="20%" scope="col" id="user">user</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="direccionurl">request url</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="motivo">motivo</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="tiempodesde">Evict time desde</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                       
+                                        <tr>
+                                                <td class="add_user_addedlist">{{ items['item']['user'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['direccionurl'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['motivo'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['tiempodesde'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['tiempohasta'] }}</td>
+        
+                                        
+                                        </tr>
+        
+                                </tbody>
+                        </table>
+
+    
+                    </div>
+            </div>
+    </span>
+
+
+
+
     </div>
 
-
-    <script>
-        var sendData = function() {
-            var tiemdesde = document.getElementById("time_desde");
-            var tiemhasta = document.getElementById("time_hasta");
-
-            console.log(tiemdesde);
-            tiemdesde.value = "Heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeyyyy";
-        }
-    </script>
 
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
