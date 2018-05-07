@@ -1,17 +1,80 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, Response, render_template, redirect, url_for, request
 import requests
 from pprint import pprint
 import sqlite3
 from db import dbaccess,timer
 import json
-
-
+import gevent
+from gevent.wsgi import WSGIServer
+from gevent.queue import Queue
+import pdb
 # create the application object
+class ServerSentEvent(object):
+
+    def __init__(self, data):
+        self.data = data
+        self.event = None
+        self.id = None
+        self.desc_map = {
+            self.data : "data",
+            self.event : "event",
+            self.id : "id"
+        }
+
+    def encode(self):
+        if not self.data:
+            return ""
+        lines = ["%s: %s" % (v, k) 
+                 for k, v in self.desc_map.iteritems() if k]
+        
+        return "%s\n\n" % "\n".join(lines)
+
+
+
+
 app = Flask(__name__)
 
 # Global variable
 success_string=""
 sdnController=""
+solicitudes=[{'user':'user1','pagina': 'mipagina', 'motivo':'Quiero entrar', 'tiempodesde' : 1525849320000, 'tiempohasta':1525849320000 }, {'user':'use3443','pagina': 'mipagina', 'motivo':'Quiero ver', 'tiempodesde' : 1525849320000, 'tiempohasta': 1525849320000}]
+
+@app.route('/user_view/<user>',methods=['GET', 'POST'])
+def userView(user):
+    if request.method == 'GET':
+        return render_template('user_request_view.html',usuario=user )
+    if request.method == 'POST':
+        # pdb.set_trace()
+        usuario = str(user)
+        pagina = str(request.form['direccionurl'])
+        motivo = str(request.form['motivo'])
+        print motivo
+        print usuario
+        
+        # evict_time_desde = str(request.form['evict_time_desde'])
+        # evict_time_hasta = str(request.form['evict_time_hasta'])
+        evict_time_desde = str(1525541016671)
+        evict_time_hasta = str(1525541056671)
+
+        # if not evict_time:
+        #     evict_time_int = 0
+        # else:
+        #     evict_time_int = int(evict_time)
+        status = "Offline"
+        item = {'user': str(usuario),'pagina': str(pagina), 'motivo':str(motivo),'tiempodesde':int(evict_time_desde),'tiempohasta':int(evict_time_hasta)}
+        solicitudes.append(item)
+        items = solicitudes
+
+        return render_template('user_request_view.html',usuario=user)
+
+
+@app.route('/admin_view',methods=['GET', 'POST'])
+def adminView():
+    error =None
+    global solicitudes
+    if request.method == 'GET':
+        items = solicitudes
+        return render_template('admin_view.html')
 
 # Redirects to user login page
 @app.route('/')
@@ -147,7 +210,8 @@ def userLogin():
 
     if request.method == 'POST':
         if dbaccess.isOnline(str(request.form['username'])):
-            error = 'You are already logged in'
+            username = str(request.form['username'])
+            return redirect('user_view/' + username)
         elif not dbaccess.isValid(str(request.form['username']), str(request.form['password'])):
             error = 'Invalid Credentials'
         else:
@@ -189,20 +253,53 @@ def sendConfig(data,url):
 def getDeviceType(environ_dict):
     if 'Ubuntu' in environ_dict['HTTP_USER_AGENT']:
         device = "Ubuntu"
-    if 'Macintosh' in environ_dict['HTTP_USER_AGENT']:
+    elif 'Macintosh' in environ_dict['HTTP_USER_AGENT']:
         device = "Macintosh"
-    if 'iPad' in environ_dict['HTTP_USER_AGENT']:
+    elif 'iPad' in environ_dict['HTTP_USER_AGENT']:
         device = "iPad"
-    if 'iPhone' in environ_dict['HTTP_USER_AGENT']:
+    elif 'iPhone' in environ_dict['HTTP_USER_AGENT']:
         device = "iPhone"
-    if 'iPod' in environ_dict['HTTP_USER_AGENT']:
+    elif 'iPod' in environ_dict['HTTP_USER_AGENT']:
         device = "iPod"
-    if 'Android' in environ_dict['HTTP_USER_AGENT']:
+    elif 'Android' in environ_dict['HTTP_USER_AGENT']:
         device = "Android"
-    if 'Windows' in environ_dict['HTTP_USER_AGENT']:
+    elif 'Windows' in environ_dict['HTTP_USER_AGENT']:
         device = "Windows"
-
+    else:
+        device = "unknown"
     return device
+
+
+def gen():
+        global solicitudes
+        try:
+            while len(solicitudes) > 0:
+                item=""
+                print "Las solicitudes son: "
+                print solicitudes           
+                item = json.dumps(solicitudes.pop())
+                print item
+                ev = ServerSentEvent(str(item))
+                yield ev.encode()
+            # ev = ServerSentEvent("Nadie aun")
+            # return ev.encode()
+        except GeneratorExit: # Or maybe use flask signals
+            print "error"
+
+@app.route("/sus")
+def subscribe():
+    
+    return Response(gen(), mimetype="text/event-stream")
+
+
+
+
+
+
+
+
+
+
 
 # start the server with the 'run()' method
 if __name__ == '__main__':

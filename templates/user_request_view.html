@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>SDN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" media="screen">
+
+</head>
+
+<body style="background:#f8f8f8; margin:0; padding:0;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div>
+            <h1 class="logo"><img src="{{ url_for('static', filename='res/logo_ad.png') }} " width="250" height="110"></h1>
+        </div>
+
+    </nav>
+    <br>
+    <div class="main">
+        <span class="left_section">
+            <h3>{{usuario}}</h3>
+            <br>
+      
+            <form action="" method="post" style="text-align:left;">
+
+                <br>
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Direccion URL</label>
+                    <input type="text" class="form-control" placeholder="ejem: https://www.youtube.com/" name="direccionurl" value="{{request.form.direccionurl }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Motivo</label>
+                    <textarea class="form-control" name="motivo" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40" value="{{request.form.motivo }}"></textarea>
+                </div>
+                <div class="form-group align-content-center h3">
+                        <label for="exampleFormControlInput1">Evict Time</label>
+                    </div>
+
+                <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-date">Desde: </span>
+    </div>
+    <input class="input-group-date" id="time_desde" type="datetime-local" placeholder="in secs" name="evict_time_desde" value="{{request.form.evict_time_desde }}">
+    </div>
+
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-date">Hasta: </span>
+        </div>
+        <input class="input-group-date" id="time_hasta" type="datetime-local" placeholder="in secs" name="evict_time" value="{{request.form.evict_time_hasta }}">
+    </div>
+
+
+
+    <div class="form-group">
+        <input class="btn btn-default" type="submit" value="Add User">
+    </div>
+    </form>
+
+    </span>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+
+</html>
