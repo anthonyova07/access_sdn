@@ -37,28 +37,38 @@ app = Flask(__name__)
 # Global variable
 success_string=""
 sdnController=""
-# solicitudes=[{'user':'user1','pagina': 'mipagina', 'motivo':'Quiero entrar', 'tiempodesde' : 1525849320000, 'tiempohasta':1525849320000 }, {'user':'use3443','pagina': 'mipagina', 'motivo':'Quiero ver', 'tiempodesde' : 1525849320000, 'tiempohasta': 1525849320000}]
-solicitudes=[]
+# solicitudes=[{'user':'user1','pagina': 'mipagina', 'commentary':'Quiero entrar', 'initial_time' : 1525849320000, 'tiempohasta':1525849320000 }, {'user':'use3443','pagina': 'mipagina', 'commentary':'Quiero ver', 'initial_time' : 1525849320000, 'tiempohasta': 1525849320000}]
+solicitudes=[{'user': 'usuario','urladdress': 'pagina', 'commentary':'commentary','initial_time':'tiempo','tiempohasta':'tiempo hasta','status':'accept' }]
 @app.route('/user_view/<user>',methods=['GET', 'POST'])
 def userView(user):
+    global solicitudes
     if request.method == 'GET':
-        return render_template('user_request_view.html',usuario=user )
+        items = solicitudes
+        items ={'item': solicitudes[0], 'items':items}
+        
+        return render_template('user_request_view.html',items=items )
     if request.method == 'POST':
         # pdb.set_trace()
         usuario = str(user)
-        pagina = str(request.form['direccionurl'])
-        motivo = str(request.form['motivo'])
+        pagina = str(request.form['urladdress'])
+        commentary = str(request.form['commentary'])
         print type(request.form)
-        evict_time_desde = request.form['evict_time_desde']
+        initial_time = request.form['initial_time']
         evict_time_hasta = request.form['evict_time_hasta']
-        print evict_time_desde
+        print initial_time
         status = "Offline"
-        item = {'user': str(usuario),'direccionurl': str(pagina), 'motivo':str(motivo),'tiempodesde':evict_time_desde,'tiempohasta':evict_time_hasta}
+        item = {'user': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'tiempohasta':evict_time_hasta}
         solicitudes.append(item)
         items = solicitudes
         result = request.form
         items ={'item': item, 'items':items}
         return render_template('user_request_view.html',items=items)
+
+@app.route('/user_url_page/',methods=['GET', 'POST'])
+def userUrlPage():
+    if request.method == 'GET':
+        link="https://github.com"
+        return render_template('user_url_page.html',link=link )    
 
 
 @app.route('/admin_view',methods=['GET', 'POST'])

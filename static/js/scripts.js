@@ -9,7 +9,7 @@ evtSrc.onmessage = function(e) {
 
     // Find a <table> element with id="myTable":
     var table = document.getElementById("body-solicitud");
-    var arrdatos = [datos.user, datos.direccionurl, datos.motivo, datos.tiempodesde, datos.tiempohasta]
+    var arrdatos = [datos.user, datos.urladdress, datos.commentary, datos.initial_time, datos.tiempohasta]
 
     var tr = document.createElement("tr");
 
@@ -29,7 +29,7 @@ evtSrc.onmessage = function(e) {
     tr.datos = datos;
     tr.addEventListener('click', function(value) {
         console.log('------------------------------------');
-        console.log(this.datos.direccionurl);
+        console.log(this.datos.urladdress);
         console.log('------------------------------------');
         callModal();
     });
@@ -42,10 +42,10 @@ evtSrc.onmessage = function(e) {
             // Get the modal
         var inputs = modal.querySelectorAll("input");
         var textarea = modal.querySelector("textarea");
-        textarea.value = datos.motivo;
+        textarea.value = datos.commentary;
         inputs[0].value = datos.user;
-        inputs[1].value = datos.direccionurl;
-        inputs[2].value = datos.tiempodesde;
+        inputs[1].value = datos.urladdress;
+        inputs[2].value = datos.initial_time;
         inputs[3].value = datos.tiempohasta;
 
         console.log(inputs)
@@ -58,9 +58,14 @@ evtSrc.onmessage = function(e) {
 
     // When the user clicks the button, open the modal 
 
+    var close = document.getElementById("botoncerrarmodal");
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
+        modal.style.display = "none";
+    }
+    close.onclick = function() {
+        console.log("Se mando a cerrar");
         modal.style.display = "none";
     }
 
@@ -79,8 +84,8 @@ evtSrc.onmessage = function(e) {
         // // // Add some text to the new cells:
         // // cell1.innerHTML = datos.user;
         // // cell2.innerHTML = datos.pagina;
-        // // cell3.innerHTML = datos.motivo;
-        // // cell4.innerHTML = tiempodesde;
+        // // cell3.innerHTML = datos.commentary;
+        // // cell4.innerHTML = initial_time;
         // // cell5.innerHTML = tiempohasta;
         // var txt = document.createTextNode(datos.user);
         // var td = document.createElement("td");
@@ -112,14 +117,14 @@ evtSrc.onmessage = function(e) {
         // cell4.classList.add("col-md-2");
         // cell5.classList.add("col-md-2");
 
-        // tiempodesde = new Date(datos.tiempodesde);
+        // initial_time = new Date(datos.initial_time);
         // tiempohasta = new Date(datos.tiempohasta);
 
         // // Add some text to the new cells:
         // cell1.innerHTML = datos.user;
         // cell2.innerHTML = datos.pagina;
-        // cell3.innerHTML = datos.motivo;
-        // cell4.innerHTML = tiempodesde;
+        // cell3.innerHTML = datos.commentary;
+        // cell4.innerHTML = initial_time;
         // cell5.innerHTML = tiempohasta;
 
         // // cell4.innerHTML = '<button type="button" class="btn btn-outline-success">Aceptar</button>' + '<button type="button" class="btn btn-danger">Danger</button>'

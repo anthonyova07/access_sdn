@@ -30,12 +30,12 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Direccion URL</label>
-                    <input type="text" class="form-control" placeholder="ejem: https://www.youtube.com/" name="direccionurl" value="{{request.form.direccionurl }}">
+                    <input type="text" class="form-control" placeholder="ejem: https://www.youtube.com/" name="urladdress" value="{{request.form.urladdress }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Motivo</label>
-                    <textarea class="form-control" name="motivo" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40" value="{{request.form.motivo }}"></textarea>
+                    <label for="exampleFormControlTextarea1">commentario</label>
+                    <textarea class="form-control" name="commentary" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40" value="{{request.form.commentary }}"></textarea>
                 </div>
                 <div class="form-group align-content-center h3">
                         <label for="exampleFormControlInput1">Evict Time</label>
@@ -45,7 +45,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-date">Desde: </span>
     </div>
-    <input class="input-group-date" id="time_desde" type="datetime-local" name="evict_time_desde" value="{{request.form.evict_time_desde }}">
+    <input class="input-group-date" id="time_desde" type="datetime-local" name="initial_time" value="{{request.form.initial_time }}">
     </div>
 
     <div class="input-group">
@@ -63,22 +63,24 @@
     </span>
     <span class="right_section">  
 
-            <ul class="nav nav-tabs">
+            <!-- <ul class="nav nav-tabs">
                     <li><a data-toggle="tab" href="#solicitudes">Lista de solicitudes</a></li>
                     <li><a data-toggle="tab" href="#historial">Pendiente</a></li>
-                  </ul>
-            <div class="tab-content">
+                  </ul> -->
+            <!-- <div class="tab-content"> -->
 
-                <div id="solicitudes" class="tab-pane fade" >
+                <!-- <div id="solicitudes" class="tab-pane fade" > -->
+                <div id="solicitudes" >
+                    
                     <table id="request_table" class="table table-hover table-bordered table-sm ">
-    
+                        
                             <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
                             <thead>
                                 <tr>
                                     <th class="add_user_list" width="20%" scope="col" id="user">user</th>
-                                    <th class="add_user_list" width="20%" scope="col" id="direccionurl">request url</th>
-                                    <th class="add_user_list" width="20%" scope="col" id="motivo">motivo</th>
-                                    <th class="add_user_list" width="20%" scope="col" id="tiempodesde">Evict time desde</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="urladdress">request url</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
                                     <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
                                 </tr>
                             </thead>
@@ -86,11 +88,11 @@
                                     {% for item in items['items'] %}
                                     <tr>
                                             <td class="add_user_addedlist">{{ item['user'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['direccionurl'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['motivo'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['tiempodesde'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['urladdress'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['commentary'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['initial_time'] }}</td>
                                             <td class="add_user_addedlist">{{ item['tiempohasta'] }}</td>
-                                    
+
                                     </tr>
                                     {% endfor %}
     
@@ -99,16 +101,15 @@
                     </table>
 
                 </div>
-                <div id="historial" class="tab-pane fade " >
+                <!-- <div id="historial" class="tab-pane fade " >
                         <table id="request_table" class="table table-hover table-bordered table-sm ">
         
-                                <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
                                 <thead>
                                     <tr>
                                         <th class="add_user_list" width="20%" scope="col" id="user">user</th>
-                                        <th class="add_user_list" width="20%" scope="col" id="direccionurl">request url</th>
-                                        <th class="add_user_list" width="20%" scope="col" id="motivo">motivo</th>
-                                        <th class="add_user_list" width="20%" scope="col" id="tiempodesde">Evict time desde</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="urladdress">request url</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
                                         <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
                                     </tr>
                                 </thead>
@@ -116,9 +117,9 @@
                                        
                                         <tr>
                                                 <td class="add_user_addedlist">{{ items['item']['user'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['direccionurl'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['motivo'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['tiempodesde'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['urladdress'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['commentary'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['initial_time'] }}</td>
                                                 <td class="add_user_addedlist">{{ items['item']['tiempohasta'] }}</td>
         
                                         
@@ -128,8 +129,8 @@
                         </table>
 
     
-                    </div>
-            </div>
+                    </div> -->
+            <!-- </div> -->
     </span>
 
 
