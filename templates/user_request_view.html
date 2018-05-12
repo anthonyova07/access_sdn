@@ -1,0 +1,148 @@
+<html>
+
+<head>
+    <title>SDN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" media="screen">
+
+</head>
+
+<body style="background:#f8f8f8; margin:0; padding:0;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div>
+            <h1 class="logo"><img src="{{ url_for('static', filename='res/logo_ad.png') }} " width="250" height="110"></h1>
+        </div>
+
+    </nav>
+    <br>
+    <div class="main">
+        <span class="left_section">
+           
+            <br>
+      
+            <form action="" method="post" style="text-align:left;">
+
+                <br>
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Direccion URL</label>
+                    <input type="text" class="form-control" placeholder="ejem: https://www.youtube.com/" name="urladdress" value="{{request.form.urladdress }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">commentario</label>
+                    <textarea class="form-control" name="commentary" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40" value="{{request.form.commentary }}"></textarea>
+                </div>
+                <div class="form-group align-content-center h3">
+                        <label for="exampleFormControlInput1">Evict Time</label>
+                </div>
+
+                <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-date">Desde: </span>
+    </div>
+    <input class="input-group-date" id="time_desde" type="datetime-local" name="initial_time" value="{{request.form.initial_time }}">
+    </div>
+
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-date">Hasta: </span>
+        </div>
+        <input class="input-group-date" id="time_hasta" type="datetime-local" name="evict_time_hasta" value="{{request.form.evict_time_hasta }}">
+    </div>
+
+    <div class="form-group">
+        <input class="btn btn-default" type="submit" value="Add Request">
+    </div>
+    </form>
+
+    </span>
+    <span class="right_section">  
+
+            <!-- <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" href="#solicitudes">Lista de solicitudes</a></li>
+                    <li><a data-toggle="tab" href="#historial">Pendiente</a></li>
+                  </ul> -->
+            <!-- <div class="tab-content"> -->
+
+                <!-- <div id="solicitudes" class="tab-pane fade" > -->
+                <div id="solicitudes" >
+                    
+                    <table id="request_table" class="table table-hover table-bordered table-sm ">
+                        
+                            <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
+                            <thead>
+                                <tr>
+                                    <th class="add_user_list" width="20%" scope="col" id="user">user</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="urladdress">request url</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for item in items['items'] %}
+                                    <tr>
+                                            <td class="add_user_addedlist">{{ item['user'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['urladdress'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['commentary'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['initial_time'] }}</td>
+                                            <td class="add_user_addedlist">{{ item['tiempohasta'] }}</td>
+
+                                    </tr>
+                                    {% endfor %}
+    
+    
+                            </tbody>
+                    </table>
+
+                </div>
+                <!-- <div id="historial" class="tab-pane fade " >
+                        <table id="request_table" class="table table-hover table-bordered table-sm ">
+        
+                                <thead>
+                                    <tr>
+                                        <th class="add_user_list" width="20%" scope="col" id="user">user</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="urladdress">request url</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                       
+                                        <tr>
+                                                <td class="add_user_addedlist">{{ items['item']['user'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['urladdress'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['commentary'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['initial_time'] }}</td>
+                                                <td class="add_user_addedlist">{{ items['item']['tiempohasta'] }}</td>
+        
+                                        
+                                        </tr>
+        
+                                </tbody>
+                        </table>
+
+    
+                    </div> -->
+            <!-- </div> -->
+    </span>
+
+
+
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+
+</html>

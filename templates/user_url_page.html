@@ -1,0 +1,11 @@
+<html>
+
+<head>
+    <title>Diseño con frames 4</title>
+</head>
+<frameset cols="10%,90%">
+    <frame name="left" src="./pagina.html" />
+    <frame name="main" src="{{ url_for('static', filename='pagina.html') }}" />
+</frameset>
+
+</html>

@@ -1,88 +1,196 @@
 <html>
-  <head>
+
+<head>
     <title>Add User</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="static/css/style.css" rel="stylesheet" media="screen">
-  </head>
-  <body style="background:#f8f8f8; margin:0; padding:0;">
-      <nav>
-        <h1 class="logo"><img src="static/res/logo_ad.png" width="250" height="110"></h1>
-      </nav>
-        
-        <div class="main">
-            <span class="left_section">
-                <h3>Add User Details</h3>
-      <br>
-      <form action="" method="post" style="text-align:left;">
-          <ul>
-              <li class="mtitles">Username</li>
-              <li style="width:310px;"><input type="text" placeholder="Username" name="username" value="{{request.form.username }}"></li>
-          </ul>
-          <ul>
-              <li  class="mtitles">Password</li>
-              <li style="width:310px;"><input type="password" placeholder="Password" name="password" value="{{request.form.password }}"></li>
-          </ul>
-          <ul>
-              <li  class="mtitles">User Group</li>
-              <li style="width:310px;">
-                <select name="user_group">
-                  <option>Employee</option>
-                  <option>Guest</option>
-                </select>
+</head>
 
-                <!--<input type="text" placeholder="Guest/Employee"  value="{{request.form.user_group }}"></li-->
-          </ul>
-          <ul>
-              <li class="mtitles">Evict Time</li>
-              <li style="width:310px;"><input type="text" placeholder="in secs" name="evict_time" value="{{request.form.evict_time }}"></li>
-          </ul>
-        
-        
-<!--           <input type="text" placeholder="id" name="id" value="{{
-          request.form.username }}">
-         <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}"> --><br>
-        <input class="btn btn-default" type="submit" value="Add User">
-      </form>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-    </h3>
+<body style="background:#f8f8f8; margin:0; padding:0;">
+    <nav>
+        <h1 class="logo"><img src="static/res/logo_ad.png" width="250" height="110"></h1>
+    </nav>
+
+    <div class="main">
+        <span class="left_section">
+            <h3>Add User Details</h3>
+                    <br>
+            <form action="" method="post" style="text-align:left;">
+                <ul>
+                    <li class="mtitles">Username</li>
+                    <li style="width:310px;"><input type="text" placeholder="Username" name="username" value="{{request.form.username }}"></li>
+                </ul>
+                <ul>
+                    <li  class="mtitles">Password</li>
+                    <li style="width:310px;"><input type="password" placeholder="Password" name="password" value="{{request.form.password }}"></li>
+                </ul>
+                <ul>
+                    <li  class="mtitles">User Group</li>
+                    <li style="width:310px;">
+                        <select name="user_group">
+                        <option>Employee</option>
+                        <option>Guest</option>
+                        </select>
+
+                        <!--<input type="text" placeholder="Guest/Employee"  value="{{request.form.user_group }}"></li-->
+                </ul>
+                <ul>
+                    <li class="mtitles">Evict Time</li>
+                    <li style="width:310px;"><input type="text" placeholder="in secs" name="evict_time" value="{{request.form.evict_time }}"></li>
+                </ul>
+                
+                    <br>
+                <input class="btn btn-default" type="submit" value="Add User">
+             </form>
+                {% if error %}
+                    <p class="error"><strong>Error:</strong> {{ error }}
+                {% endif %}
       <!--p>Click <a href="/server_add">here</a> to add server details.</p>
       <p>Click <a href="/user_delete">here</a> to manage users.</p-->
             <h5><button onClick="window.location='/server_add'"  style="position:relative;left:-18px;">Add server details</button></h5>
             <h5><button onClick="window.location='/user_delete'"  style="position:relative;left:-18px;">Manage Users</button></h5>
-            </span>
-            <span class="right_section">
-                <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;">
-         <thead>
-            <tr>
-               <th class="add_user_list">Name</th>
-               <th class="add_user_list">Password</th>
-               <th class="add_user_list">User Group</th>
-               <th class="add_user_list">Evict time</th>
-               <th class="add_user_list">OS Type</th>
-               <th class="add_user_list">IP Address</th>
-               <th class="add_user_list">Status</th>
-<!--                <th>Pin</th> -->
-            </tr>
-         </thead>
-      <tbody>
-            {% for item in items %}
-            <tr>
-            {% for i in item %}
-                  <td class="add_user_addedlist">{{ i }}</td>
-
-            {% endfor %}
-          </tr>
-            {% endfor %}
-         </tbody>
-      </table>
-            </span>
-      
+        </span>
 
 
-      
+        <span class="right_section">
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#add_user">Lista de usuarios</a></li>
+                <li><a data-toggle="tab" href="#manage_request">Administrar solicitudes</a></li>
+              </ul>
+
+            <div class="tab-content">
+                <div id="add_user" class="tab-pane fade in active">
+                        <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;">
+                        <thead>
+                            <tr>
+                            <th class="add_user_list">Name</th>
+                            <th class="add_user_list">Password</th>
+                            <th class="add_user_list">User Group</th>
+                            <th class="add_user_list">Evict time</th>
+                            <th class="add_user_list">OS Type</th>
+                            <th class="add_user_list">IP Address</th>
+                            <th class="add_user_list">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                            <tr>
+                            {% for i in item %}
+                                    <td class="add_user_addedlist">{{ i }}</td>
+
+                            {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="manage_request" class="tab-pane fade">
+                    <table id="request_table" class="table table-hover table-bordered table-sm nowrap">
+
+                        <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
+                        <thead>
+                            <tr>
+                                <th class="add_user_list" width="20%"border-left="1" scope="col" id="user">user</th>
+                                <th class="add_user_list" width="20%" scope="col" id="solicitud">request url</th>
+                                <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
+                                <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
+                                <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body-solicitud">
+                            <tr>
+                                <td >Jose</td>
+                                <td >youtube</td>
+                                <td >quiero entrar</td>
+                                <td  value="Date.getTime()">mi tiempo</td>
+                                <td >Hasta este mismo tiempo</td>
+            
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </span>
+
+    </div>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+    <div id="myModal" class="modal " role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" style="text-align:left;">
+
+                        <br>
+                        <div class="form-group">
+                            <label for="exam">Usuario</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Direccion URL</label>
+                            <input type="text" class="form-control" placeholder="ejem: https://www.youtube.com/">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">commentary</label>
+                            <textarea class="form-control" name="commentary" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40"></textarea>
+                        </div>
+                        <div class="form-group align-content-center h3">
+                            <label for="exampleFormControlInput1">Evict Time</label>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-date">Desde: </span>
+                            </div>
+                            <input class="input-group-date" type="datetime-local" name="initial_time">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-date">Hasta: </span>
+                            </div>
+                            <input class="input-group-date" type="datetime-local" name="evict_time_hasta">
+                        </div>
+                        <div class="form-group">
+
+
+                            <input class="btn btn-default" type="submit" value="Aceptar">
+                            <input class="btn btn-default" type="submit" value="Rechazar">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="botoncerrarmodal" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
         </div>
-  </body>
+    </div>
+
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js "></script>
+    <script src="static/js/scripts.js"></script>
+
+</body>
+
 </html>

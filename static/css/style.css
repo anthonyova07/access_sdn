@@ -1,21 +1,18 @@
-body
-{
-    background:#0178D6 url(/static/res/background.jpg) no-repeat center right;
+body {
+    background: #0178D6 url(/static/res/background.jpg) no-repeat center right;
     font-family: arial, verdana;
     font-size: 12pt;
     color: #333333;
     height: 100%;
-    background-size:90%;
-    
+    background-size: 90%;
 }
 
-h5
-{
+h5 {
     margin: 0;
     padding: 0;
 }
-.container
-{
+
+.container {
     /*background: rgba(0,120,215,0.3);*/
     width: 60%;
     min-width: 800px;
@@ -24,8 +21,8 @@ h5
     top: 30%;
     text-align: center;
 }
-input[type=text]
-{
+
+input[type=text] {
     width: 250px;
     height: 45px;
     border: 1px solid #cccccc;
@@ -35,8 +32,7 @@ input[type=text]
     padding-left: 10px;
 }
 
-input[type=password]
-{
+input[type=password] {
     width: 250px;
     height: 45px;
     border: 1px solid #cccccc;
@@ -44,17 +40,15 @@ input[type=password]
     font-size: 12pt;
     color: #333;
     padding-left: 10px;
-    
 }
 
-input[type=submit]
-{
+input[type=submit] {
     background: #ffba00;
-    border:none;
+    border: none;
     border-radius: 5px;
     width: 250px;
     height: 45px;
-    margin: 5px 13px 0 16px ;
+    margin: 5px 13px 0 16px;
     text-align: center;
     text-transform: uppercase;
     font-size: 16px;
@@ -62,14 +56,14 @@ input[type=submit]
     color: #333;
     cursor: pointer;
 }
-.login_button
-{
+
+.login_button {
     background: #ffba00;
-    border:none;
+    border: none;
     border-radius: 5px;
     width: 128px !important;
     height: 40px;
-    margin: 5px 13px 0 0 !important ;
+    margin: 5px 13px 0 0 !important;
     text-align: center;
     text-transform: uppercase;
     font-size: 16px;
@@ -77,76 +71,83 @@ input[type=submit]
     color: #333;
     cursor: pointer;
 }
-.logo
-{
+
+.logo {
     height: 80px;
     background: #077fde;
     padding: 10px;
     margin: 0;
 }
 
-.success_msg
-{
-    font-size: 24pt; 
+.success_msg {
+    font-size: 24pt;
     color: green;
     font-family: arial;
     font-weight: normal;
     margin-top: 5%;
 }
-.failure_msg
-{
-    font-size: 24pt; 
+
+.failure_msg {
+    font-size: 24pt;
     color: red;
     font-family: arial;
     font-weight: normal;
     margin-top: 5%;
 }
-.main
-{
-	width:100% !important;
-	margin:auto;
-}
-.left_section
-{
-	width:22%;
-	/*margin-top:5%;*/
-	float:left;
-	display:inline-block;
-	overflow:hidden;
-	text-align:center;
-	border-right:1px solid #999999;
-	padding:5px;
+
+.main {
+    width: 100% !important;
+    margin: auto;
 }
 
-.right_section
-{
-	width:76%;
-	/*margin-top:5%;*/
-	float:left;
-	display:inline-block;
-	overflow:auto;
-	text-align:center;
+.left_section {
+    width: 22%;
+    /*margin-top:5%;*/
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    border-right: 1px solid #999999;
+    padding: 5px;
 }
 
-.add_user_list
-{
-	border-top:1px solid #d8d8d8;
-	border-right:1px solid #d8d8d8;
-	padding:10px;
-	background:#efefef;
-        font-size: 10px;
-        color: #333333;
+.right_section {
+    width: 76%;
+    /*margin-top:5%;*/
+    float: left;
+    display: inline-block;
+    overflow: auto;
+    text-align: center;
 }
-.add_user_addedlist
-{
-	border-top:1px solid #d8d8d8;
-	border-right:1px solid #d8d8d8;
-	padding:10px;
+
+.add_user_list {
+    border-top: 1px solid #d8d8d8;
+    border-right: 1px solid #d8d8d8;
+    padding: 10px;
+    background: #efefef;
+    font-size: 10px;
+    color: #333333;
 }
-.sd_button
-{
-	background: #0051a7;
-    border:none;
+
+.border_cell {
+    border-top: 1px solid #333333;
+    border-right: 1px solid #333333;
+    padding: 10px;
+    font-size: 10px;
+    background: #efefef;
+    font-size: 10px;
+    color: #efefef;
+}
+
+.add_user_addedlist {
+    border-top: 1px solid #d8d8d8;
+    border-right: 1px solid #d8d8d8;
+    padding: 10px;
+}
+
+.sd_button {
+    background: #0051a7;
+    border: none;
     border-radius: 5px;
     width: 400px;
     height: 40px;
@@ -160,8 +161,7 @@ input[type=submit]
     text-transform: uppercase;
 }
 
-.left_section h4
-{
+.left_section h4 {
     text-align: left;
     margin: 0;
     padding: 0;
@@ -172,8 +172,7 @@ input[type=submit]
     height: 35px;
 }
 
-.left_section ul
-{
+.left_section ul {
     list-style-type: none;
     border: 0px solid red;
     display: inline-block;
@@ -181,58 +180,53 @@ input[type=submit]
     margin: 4px;
     overflow: auto;
 }
-.left_section li
-{
+
+.left_section li {
     display: inline-block;
     height: 45px;
     line-height: 40px;
-    position:relative;
-    left:-27px;   
+    position: relative;
+    left: -27px;
 }
 
-.left_section button
-{
+.left_section button {
     width: 250px;
     height: 45px;
     margin: 5px 0 0 34px;
     background: #ccc;
     border-radius: 5px;
-    border:none;
+    border: none;
     font-size: 14px;
-    color:#333333;
+    color: #333333;
     font-weight: 600;
     cursor: pointer;
     text-transform: uppercase;
-
 }
-.add_button
-{
+
+.add_button {
     width: 300px;
     height: 45px;
     margin: 5px;
     background: #ccc;
     border-radius: 5px;
-    border:none;
+    border: none;
     font-size: 14px;
-
-    color:#333333;
+    color: #333333;
     font-weight: 600;
     cursor: pointer;
     position: relative;
-    top:-69px;
-    left:436px;
+    top: -69px;
+    left: 436px;
     text-transform: uppercase;
-
 }
 
-.mtitles{
-    width: 310px; 
-    height:34px;
+.mtitles {
+    width: 310px;
+    height: 34px;
     font-size: 12pt;
 }
 
-select
-{
+select {
     width: 250px;
     height: 45px;
     border: 1px solid #cccccc;

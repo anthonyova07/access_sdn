@@ -1,17 +1,83 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, Response, render_template, redirect, url_for, request
 import requests
 from pprint import pprint
 import sqlite3
 from db import dbaccess,timer
 import json
-
-
+import gevent
+from gevent.wsgi import WSGIServer
+from gevent.queue import Queue
+import pdb
 # create the application object
+class ServerSentEvent(object):
+
+    def __init__(self, data):
+        self.data = data
+        self.event = None
+        self.id = None
+        self.desc_map = {
+            self.data : "data",
+            self.event : "event",
+            self.id : "id"
+        }
+
+    def encode(self):
+        if not self.data:
+            return ""
+        lines = ["%s: %s" % (v, k) 
+                 for k, v in self.desc_map.iteritems() if k]
+        
+        return "%s\n\n" % "\n".join(lines)
+
+
+
+
 app = Flask(__name__)
 
 # Global variable
 success_string=""
 sdnController=""
+# solicitudes=[{'user':'user1','pagina': 'mipagina', 'commentary':'Quiero entrar', 'initial_time' : 1525849320000, 'tiempohasta':1525849320000 }, {'user':'use3443','pagina': 'mipagina', 'commentary':'Quiero ver', 'initial_time' : 1525849320000, 'tiempohasta': 1525849320000}]
+solicitudes=[{'user': 'usuario','urladdress': 'pagina', 'commentary':'commentary','initial_time':'tiempo','tiempohasta':'tiempo hasta','status':'accept' }]
+@app.route('/user_view/<user>',methods=['GET', 'POST'])
+def userView(user):
+    global solicitudes
+    if request.method == 'GET':
+        items = solicitudes
+        items ={'item': solicitudes[0], 'items':items}
+        
+        return render_template('user_request_view.html',items=items )
+    if request.method == 'POST':
+        # pdb.set_trace()
+        usuario = str(user)
+        pagina = str(request.form['urladdress'])
+        commentary = str(request.form['commentary'])
+        print type(request.form)
+        initial_time = request.form['initial_time']
+        evict_time_hasta = request.form['evict_time_hasta']
+        print initial_time
+        status = "Offline"
+        item = {'user': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'tiempohasta':evict_time_hasta}
+        solicitudes.append(item)
+        items = solicitudes
+        result = request.form
+        items ={'item': item, 'items':items}
+        return render_template('user_request_view.html',items=items)
+
+@app.route('/user_url_page/',methods=['GET', 'POST'])
+def userUrlPage():
+    if request.method == 'GET':
+        link="https://github.com"
+        return render_template('user_url_page.html',link=link )    
+
+
+@app.route('/admin_view',methods=['GET', 'POST'])
+def adminView():
+    error =None
+    global solicitudes
+    if request.method == 'GET':
+        items = solicitudes
+        return render_template('admin_view.html')
 
 # Redirects to user login page
 @app.route('/')
@@ -147,7 +213,8 @@ def userLogin():
 
     if request.method == 'POST':
         if dbaccess.isOnline(str(request.form['username'])):
-            error = 'You are already logged in'
+            username = str(request.form['username'])
+            return redirect('user_view/' + username)
         elif not dbaccess.isValid(str(request.form['username']), str(request.form['password'])):
             error = 'Invalid Credentials'
         else:
@@ -189,20 +256,55 @@ def sendConfig(data,url):
 def getDeviceType(environ_dict):
     if 'Ubuntu' in environ_dict['HTTP_USER_AGENT']:
         device = "Ubuntu"
-    if 'Macintosh' in environ_dict['HTTP_USER_AGENT']:
+    elif 'Macintosh' in environ_dict['HTTP_USER_AGENT']:
         device = "Macintosh"
-    if 'iPad' in environ_dict['HTTP_USER_AGENT']:
+    elif 'iPad' in environ_dict['HTTP_USER_AGENT']:
         device = "iPad"
-    if 'iPhone' in environ_dict['HTTP_USER_AGENT']:
+    elif 'iPhone' in environ_dict['HTTP_USER_AGENT']:
         device = "iPhone"
-    if 'iPod' in environ_dict['HTTP_USER_AGENT']:
+    elif 'iPod' in environ_dict['HTTP_USER_AGENT']:
         device = "iPod"
-    if 'Android' in environ_dict['HTTP_USER_AGENT']:
+    elif 'Android' in environ_dict['HTTP_USER_AGENT']:
         device = "Android"
-    if 'Windows' in environ_dict['HTTP_USER_AGENT']:
+    elif 'Windows' in environ_dict['HTTP_USER_AGENT']:
         device = "Windows"
-
+    elif 'Elementary' in environ_dict['HTTP_USER_AGENT']:
+        device = "Elementary"
+    else:
+        device = "unknown"
     return device
+
+
+def gen():
+        global solicitudes
+        try:
+            while len(solicitudes) > 0:
+                item=""
+                print "Las solicitudes son: "
+                print solicitudes           
+                item = json.dumps(solicitudes.pop())
+                print item
+                ev = ServerSentEvent(str(item))
+                yield ev.encode()
+            # ev = ServerSentEvent("Nadie aun")
+            # return ev.encode()
+        except GeneratorExit: # Or maybe use flask signals
+            print "error"
+
+@app.route("/sus")
+def subscribe():
+    
+    return Response(gen(), mimetype="text/event-stream")
+
+
+
+
+
+
+
+
+
+
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
