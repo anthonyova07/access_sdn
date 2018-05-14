@@ -95,22 +95,17 @@
                         <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
                         <thead>
                             <tr>
-                                <th class="add_user_list" width="20%"border-left="1" scope="col" id="user">user</th>
-                                <th class="add_user_list" width="20%" scope="col" id="solicitud">request url</th>
-                                <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
-                                <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
-                                <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                <th class="add_user_list" width="15%"border-left="1" scope="col">user</th>
+                                <th class="add_user_list" width="15%" scope="col">request url</th>
+                                <th class="add_user_list" width="20%" scope="col">commentary</th>
+                                <th class="add_user_list" width="20%" scope="col">Evict time desde</th>
+                                <th class="add_user_list" width="20%" scope="col">Evict time hasta</th>
+                                <th class="add_user_list" width="10%" scope="col" >Status</th>
+
                             </tr>
                         </thead>
                         <tbody id="body-solicitud">
-                            <tr>
-                                <td >Jose</td>
-                                <td >youtube</td>
-                                <td >quiero entrar</td>
-                                <td  value="Date.getTime()">mi tiempo</td>
-                                <td >Hasta este mismo tiempo</td>
-            
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -132,46 +127,45 @@
                     <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" style="text-align:left;">
 
-                        <br>
-                        <div class="form-group">
-                            <label for="exam">Usuario</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Direccion URL</label>
-                            <input type="text" class="form-control" placeholder="ejem: https://www.youtube.com/">
-                        </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="exam">Usuario</label>
+                        <input type="text" id="user" name="user" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Direccion URL</label>
+                        <input type="text" class="form-control" name="urladdress" id="urladdress" placeholder="ejem: https://www.youtube.com/">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">commentary</label>
-                            <textarea class="form-control" name="commentary" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40"></textarea>
-                        </div>
-                        <div class="form-group align-content-center h3">
-                            <label for="exampleFormControlInput1">Evict Time</label>
-                        </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">commentary</label>
+                        <textarea class="form-control" name="commentary" id="commentary" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40"></textarea>
+                    </div>
+                    <div class="form-group align-content-center h3">
+                        <label for="exampleFormControlInput1">Evict Time</label>
+                    </div>
 
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-date">Desde: </span>
-                            </div>
-                            <input class="input-group-date" type="datetime-local" name="initial_time">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-date">Desde: </span>
                         </div>
+                        <input class="input-group-date" type="datetime-local" id="initial_time" name="initial_time">
+                    </div>
 
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-date">Hasta: </span>
-                            </div>
-                            <input class="input-group-date" type="datetime-local" name="evict_time_hasta">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-date">Hasta: </span>
                         </div>
-                        <div class="form-group">
+                        <input class="input-group-date" type="datetime-local" id="evict_time_hasta" name="evict_time_hasta">
+                    </div>
+                    <input class="hidden" id="status" type="text" name="status">
 
+                    <div class="form-group">
 
-                            <input class="btn btn-default" type="submit" value="Aceptar">
-                            <input class="btn btn-default" type="submit" value="Rechazar">
-                        </div>
-                    </form>
+                        <button class="submitbtn" id="boton_aceptar" value="Acept">Aceptar </button>
+                        <button class="submitbtn" id="boton_rechazar" value="Reject">Rechazar </button>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="botoncerrarmodal" class="btn btn-default" data-dismiss="modal">Close</button>

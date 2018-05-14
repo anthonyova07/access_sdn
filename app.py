@@ -38,13 +38,13 @@ app = Flask(__name__)
 success_string=""
 sdnController=""
 # solicitudes=[{'user':'user1','pagina': 'mipagina', 'commentary':'Quiero entrar', 'initial_time' : 1525849320000, 'tiempohasta':1525849320000 }, {'user':'use3443','pagina': 'mipagina', 'commentary':'Quiero ver', 'initial_time' : 1525849320000, 'tiempohasta': 1525849320000}]
-solicitudes=[{'user': 'usuario','urladdress': 'pagina', 'commentary':'commentary','initial_time':'tiempo','tiempohasta':'tiempo hasta','status':'accept' }]
+solicitudes=[{'user': 'usuario','urladdress': 'pagina', 'commentary':'commentary','initial_time':'tiempo','tiempohasta':'tiempo hasta','status':'accepted' }]
 @app.route('/user_view/<user>',methods=['GET', 'POST'])
 def userView(user):
     global solicitudes
     if request.method == 'GET':
         items = solicitudes
-        items ={'item': solicitudes[0], 'items':items}
+        items ={'items':items}
         
         return render_template('user_request_view.html',items=items )
     if request.method == 'POST':
@@ -56,12 +56,12 @@ def userView(user):
         initial_time = request.form['initial_time']
         evict_time_hasta = request.form['evict_time_hasta']
         print initial_time
-        status = "Offline"
-        item = {'user': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'tiempohasta':evict_time_hasta}
+        status = "registered"
+        item = {'user': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'tiempohasta':evict_time_hasta,'status':status}
         solicitudes.append(item)
         items = solicitudes
         result = request.form
-        items ={'item': item, 'items':items}
+        items ={'items':items}
         return render_template('user_request_view.html',items=items)
 
 @app.route('/user_url_page/',methods=['GET', 'POST'])
@@ -293,17 +293,34 @@ def gen():
 
 @app.route("/sus")
 def subscribe():
-    
     return Response(gen(), mimetype="text/event-stream")
 
+@app.route("/set_status",methods=['GET','POST'] )
+def setStatus():
+    global solicitudes
+    print "Se mando a setear el estado"
+    # pdb.set_trace()
 
-
-
-
-
-
-
-
+    if request.method == 'POST':
+        # pdb.set_trace()
+        usuario = str(request.form['user'])
+        print usuario
+        pagina = str(request.form['urladdress'])
+        print pagina
+        commentary = str(request.form['commentary'])
+        print commentary
+        print request.form
+        initial_time = request.form['initial_time']
+        evict_time_hasta = request.form['evict_time_hasta']
+        print initial_time
+        status = str(request.form['status'])
+        item = {'user': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'tiempohasta':evict_time_hasta, 'status':status }
+        solicitudes.append(item)
+        items = solicitudes
+        result = request.form
+        items ={'item': item, 'items':items}
+    return json.dumps({"result":items})
+    # return Response(items, mimetype="text/json")
 
 
 # start the server with the 'run()' method

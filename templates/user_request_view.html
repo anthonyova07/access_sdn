@@ -82,21 +82,23 @@
                                     <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
                                     <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
                                     <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="status">Status</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                    {% for item in items['items'] %}
-                                    <tr>
-                                            <td class="add_user_addedlist">{{ item['user'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['urladdress'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['commentary'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['initial_time'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['tiempohasta'] }}</td>
+                                        {% for item in items['items'] %}
+                                        <tr>
+                                                <td class="add_user_addedlist">{{ item['user'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['urladdress'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['commentary'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['initial_time'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['tiempohasta'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['status'] }}</td>
 
-                                    </tr>
-                                    {% endfor %}
-    
-    
+                                        </tr>
+                                        {% endfor %}
+               
                             </tbody>
                     </table>
 
@@ -116,11 +118,7 @@
                                 <tbody>
                                        
                                         <tr>
-                                                <td class="add_user_addedlist">{{ items['item']['user'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['urladdress'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['commentary'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['initial_time'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['tiempohasta'] }}</td>
+                                              
         
                                         
                                         </tr>
