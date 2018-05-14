@@ -95,22 +95,17 @@
                         <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
                         <thead>
                             <tr>
-                                <th class="add_user_list" width="20%"border-left="1" scope="col" id="user">user</th>
-                                <th class="add_user_list" width="20%" scope="col" id="solicitud">request url</th>
-                                <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
-                                <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
-                                <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                <th class="add_user_list" width="15%"border-left="1" scope="col">user</th>
+                                <th class="add_user_list" width="15%" scope="col">request url</th>
+                                <th class="add_user_list" width="20%" scope="col">commentary</th>
+                                <th class="add_user_list" width="20%" scope="col">Evict time desde</th>
+                                <th class="add_user_list" width="20%" scope="col">Evict time hasta</th>
+                                <th class="add_user_list" width="10%" scope="col" >Status</th>
+
                             </tr>
                         </thead>
                         <tbody id="body-solicitud">
-                            <tr>
-                                <td >Jose</td>
-                                <td >youtube</td>
-                                <td >quiero entrar</td>
-                                <td  value="Date.getTime()">mi tiempo</td>
-                                <td >Hasta este mismo tiempo</td>
-            
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -120,8 +115,7 @@
         </span>
 
     </div>
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
+    <a name="" id="" class="btn btn-primary" onclick="document.getElementById('myModal').style.display='block'" role="button">Open Modal</a>
     <div id="myModal" class="modal " role="dialog">
         <div class="modal-dialog">
 
@@ -132,63 +126,70 @@
                     <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" style="text-align:left;">
 
-                        <br>
-                        <div class="form-group">
-                            <label for="exam">Usuario</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Direccion URL</label>
-                            <input type="text" class="form-control" placeholder="ejem: https://www.youtube.com/">
-                        </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="exam">Usuario</label>
+                        <input type="text" id="username" name="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Direccion URL</label>
+                        <input type="text" class="form-control" name="urladdress" id="urladdress" placeholder="ejem: https://www.youtube.com/">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">commentary</label>
-                            <textarea class="form-control" name="commentary" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40"></textarea>
-                        </div>
-                        <div class="form-group align-content-center h3">
-                            <label for="exampleFormControlInput1">Evict Time</label>
-                        </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">commentary</label>
+                        <textarea class="form-control" name="commentary" id="commentary" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40"></textarea>
+                    </div>
+                    <div class="form-group align-content-center h3" style="align-content: center">
+                        <label style="align-content: center">Evict Time</label>
+                    </div>
+                    <div>
+                        <span>
 
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-date">Desde: </span>
-                            </div>
-                            <input class="input-group-date" type="datetime-local" name="initial_time">
-                        </div>
-
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-date">Hasta: </span>
-                            </div>
-                            <input class="input-group-date" type="datetime-local" name="evict_time_hasta">
-                        </div>
-                        <div class="form-group">
-
-
-                            <input class="btn btn-default" type="submit" value="Aceptar">
-                            <input class="btn btn-default" type="submit" value="Rechazar">
-                        </div>
-                    </form>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-date">Desde: </span>
+                    </div>
+                    <input class="input-group-date" type="datetime-local" id="initial_time" name="initial_time">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="botoncerrarmodal" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-date">Hasta: </span>
+                    </div>
+                    <input class="input-group-date" type="datetime-local" id="final_time" name="final_time">
                 </div>
+
+                </span>
+
+                <br>
+                <div>
+
+                    <label for="restante">Tiempo de navegacion</label>
+                </div>
+                <span id="restante">resto</span>
             </div>
 
         </div>
+        <input class="hidden" id="id" type="text" name="id">
+
+        <div id="botones" class="form-group btn-modal">
+
+            <button class="submitbtn" id="boton_aceptar" value="Acept">Aceptar </button>
+            <button class="submitbtn" id="boton_rechazar" value="Reject">Rechazar </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="botoncerrarmodal" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+
+    </div>
     </div>
 
     <script src="static/js/jquery.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js "></script>
     <script src="static/js/scripts.js"></script>
 
 </body>

@@ -37,15 +37,14 @@ app = Flask(__name__)
 # Global variable
 success_string=""
 sdnController=""
-# solicitudes=[{'user':'user1','pagina': 'mipagina', 'commentary':'Quiero entrar', 'initial_time' : 1525849320000, 'tiempohasta':1525849320000 }, {'user':'use3443','pagina': 'mipagina', 'commentary':'Quiero ver', 'initial_time' : 1525849320000, 'tiempohasta': 1525849320000}]
-solicitudes=[{'user': 'usuario','urladdress': 'pagina', 'commentary':'commentary','initial_time':'tiempo','tiempohasta':'tiempo hasta','status':'accept' }]
+# solicitudes=[{'username':'user1','pagina': 'mipagina', 'commentary':'Quiero entrar', 'initial_time' : 1525849320000, 'final_time':1525849320000 }, {'username':'use3443','pagina': 'mipagina', 'commentary':'Quiero ver', 'initial_time' : 1525849320000, 'final_time': 1525849320000}]
+solicitudes=[{'id':10, 'username': 'usuario','urladdress': 'pagina', 'commentary':'commentary','initial_time':'2018-05-15T12:00','final_time':'2018-05-15T15:30','status':'registered' }]
 @app.route('/user_view/<user>',methods=['GET', 'POST'])
 def userView(user):
     global solicitudes
     if request.method == 'GET':
-        items = solicitudes
-        items ={'item': solicitudes[0], 'items':items}
-        
+        items = dbaccess.getAllMyRequest(str(user))
+        items ={'items':items}
         return render_template('user_request_view.html',items=items )
     if request.method == 'POST':
         # pdb.set_trace()
@@ -54,30 +53,25 @@ def userView(user):
         commentary = str(request.form['commentary'])
         print type(request.form)
         initial_time = request.form['initial_time']
-        evict_time_hasta = request.form['evict_time_hasta']
+        final_time = request.form['final_time']
         print initial_time
-        status = "Offline"
-        item = {'user': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'tiempohasta':evict_time_hasta}
+        status = "registered"
+
+        dbaccess.insertUserRequest(usuario,pagina,commentary,initial_time,final_time,status)
+
+        item = {'username': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'final_time':final_time,'status':status}
         solicitudes.append(item)
         items = solicitudes
         result = request.form
-        items ={'item': item, 'items':items}
+        items ={'items':items}
         return render_template('user_request_view.html',items=items)
 
-@app.route('/user_url_page/',methods=['GET', 'POST'])
-def userUrlPage():
+@app.route('/user_url_page/<ide>',methods=['GET', 'POST'])
+def userUrlPage(ide):
     if request.method == 'GET':
-        link="https://github.com"
-        return render_template('user_url_page.html',link=link )    
+        
+        return render_template('user_url_page.html',messajes={'fecha':'2018-05-15T15:30', 'link':link}  )    
 
-
-@app.route('/admin_view',methods=['GET', 'POST'])
-def adminView():
-    error =None
-    global solicitudes
-    if request.method == 'GET':
-        items = solicitudes
-        return render_template('admin_view.html')
 
 # Redirects to user login page
 @app.route('/')
@@ -279,13 +273,19 @@ def gen():
         global solicitudes
         try:
             while len(solicitudes) > 0:
-                item=""
-                print "Las solicitudes son: "
-                print solicitudes           
+                item=""       
+                # pdb.set_trace()  
                 item = json.dumps(solicitudes.pop())
-                print item
+                solicitud = dbaccess.getAllUserRequest()
+                dic = {'erase':"Texto aqui para llegar alla y borrar"}
+                item = json.dumps(dic)
                 ev = ServerSentEvent(str(item))
                 yield ev.encode()
+                while len(solicitud) > 0:
+                    item = json.dumps(solicitud.pop())
+                    print item
+                    ev = ServerSentEvent(str(item))
+                    yield ev.encode()
             # ev = ServerSentEvent("Nadie aun")
             # return ev.encode()
         except GeneratorExit: # Or maybe use flask signals
@@ -293,18 +293,37 @@ def gen():
 
 @app.route("/sus")
 def subscribe():
-    
     return Response(gen(), mimetype="text/event-stream")
 
+@app.route("/set_status",methods=['GET','POST'] )
+def setStatus():
+    global solicitudes
+    print "Se mando a setear el estado"
+    # pdb.set_trace()
 
-
-
-
-
-
-
-
-
+    if request.method == 'POST':
+        usuario = str(request.form['username'])
+        pagina = str(request.form['urladdress'])
+        commentary = str(request.form['commentary'])
+        initial_time = request.form['initial_time']
+        final_time = request.form['final_time']
+        status = str(request.form['status'])
+        ide = int(request.form['id'])
+        print "El id es:" + str(ide)
+        item = {'id':ide,'username': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'final_time':final_time, 'status':status }
+        dbaccess.updateUserRequest(ide,pagina,commentary,initial_time,final_time,status)
+        solicitudes.append(item)
+        items = solicitudes
+        result = request.form
+        # pdb.set_trace()
+        items ={'item': item, 'items':items}
+        Response(items, mimetype="text/json")
+        print 'Se respondio'
+    return json.dumps({"result":items})
+    # return Response(items, mimetype="text/json")
+@app.route('/prueba')
+def prueba():
+    redirect(url_for("us"))
 
 # start the server with the 'run()' method
 if __name__ == '__main__':

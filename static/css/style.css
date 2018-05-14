@@ -57,6 +57,21 @@ input[type=submit] {
     cursor: pointer;
 }
 
+.submitbtn {
+    background: #ffba00;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+    height: 45px;
+    margin: 5px 13px 0 16px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+}
+
 .login_button {
     background: #ffba00;
     border: none;

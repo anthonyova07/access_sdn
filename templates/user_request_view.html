@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">commentario</label>
+                    <label for="exampleFormControlTextarea1">Comentario</label>
                     <textarea class="form-control" name="commentary" placeholder="ejem: Necesito ver tutoriales de..." rows="5" cols="40" value="{{request.form.commentary }}"></textarea>
                 </div>
                 <div class="form-group align-content-center h3">
@@ -52,7 +52,7 @@
         <div class="input-group-prepend">
             <span class="input-group-date">Hasta: </span>
         </div>
-        <input class="input-group-date" id="time_hasta" type="datetime-local" name="evict_time_hasta" value="{{request.form.evict_time_hasta }}">
+        <input class="input-group-date" id="time_hasta" type="datetime-local" name="final_time" value="{{request.form.final_time }}">
     </div>
 
     <div class="form-group">
@@ -77,26 +77,28 @@
                             <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
                             <thead>
                                 <tr>
-                                    <th class="add_user_list" width="20%" scope="col" id="user">user</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="username">user</th>
                                     <th class="add_user_list" width="20%" scope="col" id="urladdress">request url</th>
                                     <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
                                     <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
-                                    <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="final_time">Evict time hasta</th>
+                                    <th class="add_user_list" width="20%" scope="col" id="status">Status</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                    {% for item in items['items'] %}
-                                    <tr>
-                                            <td class="add_user_addedlist">{{ item['user'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['urladdress'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['commentary'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['initial_time'] }}</td>
-                                            <td class="add_user_addedlist">{{ item['tiempohasta'] }}</td>
+                                        {% for item in items['items'] %}
+                                        <tr>
+                                                <td class="add_user_addedlist">{{ item['username'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['urladdress'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['commentary'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['initial_time'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['final_time'] }}</td>
+                                                <td class="add_user_addedlist">{{ item['status'] }}</td>
 
-                                    </tr>
-                                    {% endfor %}
-    
-    
+                                        </tr>
+                                        {% endfor %}
+               
                             </tbody>
                     </table>
 
@@ -106,21 +108,17 @@
         
                                 <thead>
                                     <tr>
-                                        <th class="add_user_list" width="20%" scope="col" id="user">user</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="username">user</th>
                                         <th class="add_user_list" width="20%" scope="col" id="urladdress">request url</th>
                                         <th class="add_user_list" width="20%" scope="col" id="commentary">commentary</th>
                                         <th class="add_user_list" width="20%" scope="col" id="initial_time">Evict time desde</th>
-                                        <th class="add_user_list" width="20%" scope="col" id="tiempohasta">Evict time hasta</th>
+                                        <th class="add_user_list" width="20%" scope="col" id="final_time">Evict time hasta</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                        
                                         <tr>
-                                                <td class="add_user_addedlist">{{ items['item']['user'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['urladdress'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['commentary'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['initial_time'] }}</td>
-                                                <td class="add_user_addedlist">{{ items['item']['tiempohasta'] }}</td>
+                                              
         
                                         
                                         </tr>

@@ -20,11 +20,11 @@
             <!-- <table border="0"  cellspacing="0" cellpadding="0" style="width:100%; border-bottom:1px solid #d8d8d8;"> -->
             <thead>
                 <tr>
-                    <th id="user">user</th>
+                    <th id="username">user</th>
                     <th id="solicitud">request url</th>
                     <th id="commentary">commentary</th>
                     <th id="initial_time">Evict time desde</th>
-                    <th id="tiempohasta">Evict time hasta</th>
+                    <th id="final_time">Evict time hasta</th>
                 </tr>
             </thead>
             <tbody class="col-md-12" id="body-solicitud">
@@ -52,7 +52,7 @@
             console.log("Los datos son:", datos)
                 // Find a <table> element with id="myTable":
             var table = document.getElementById("request_table");
-            var arrdatos = [datos.user, datos.pagina, datos.commentary, datos.initial_time, datos.tiempohasta]
+            var arrdatos = [datos.user, datos.pagina, datos.commentary, datos.initial_time, datos.final_time]
 
             var tr = document.createElement("tr");
 
@@ -76,7 +76,7 @@
                 // // cell2.innerHTML = datos.pagina;
                 // // cell3.innerHTML = datos.commentary;
                 // // cell4.innerHTML = initial_time;
-                // // cell5.innerHTML = tiempohasta;
+                // // cell5.innerHTML = final_time;
                 // var txt = document.createTextNode(datos.user);
                 // var td = document.createElement("td");
 
@@ -108,14 +108,14 @@
                 // cell5.classList.add("col-md-2");
 
                 // initial_time = new Date(datos.initial_time);
-                // tiempohasta = new Date(datos.tiempohasta);
+                // final_time = new Date(datos.final_time);
 
                 // // Add some text to the new cells:
                 // cell1.innerHTML = datos.user;
                 // cell2.innerHTML = datos.pagina;
                 // cell3.innerHTML = datos.commentary;
                 // cell4.innerHTML = initial_time;
-                // cell5.innerHTML = tiempohasta;
+                // cell5.innerHTML = final_time;
 
                 // // cell4.innerHTML = '<button type="button" class="btn btn-outline-success">Aceptar</button>' + '<button type="button" class="btn btn-danger">Danger</button>'
 

@@ -1,4 +1,6 @@
 import sqlite3
+import pdb
+
 
 # Inserting data into Server table
 def insertServertable(internal_ip,external_ip,authServer_ip,internal_mac, \
@@ -154,3 +156,79 @@ def isValid(name,passwd):
 			return False
 	conn.close()
 
+def insertUserRequest(user,urladdress,comentary,initial_time,final_time, status):
+	conn = sqlite3.connect('db//test.db')
+	print ("Opened database successfully")
+
+	conn.execute("INSERT INTO userequest (username,urladdress, \
+		commentary,initial_time, final_time,status) VALUES (?,?,?,?,?,?)" \
+	    ,(user,urladdress,comentary,initial_time,final_time,status ))
+
+	conn.commit()
+	print ("Records stored successfully")
+	conn.close()
+
+
+def getAllUserRequest():
+	conn = sqlite3.connect('db//test.db')
+	print ("Opened database successfully")
+
+	cursor = conn.execute("SELECT * from userequest")
+
+	keys = [tuple[0] for tuple in cursor.description]
+
+	user_request_list=[]
+	for row in cursor:
+		values = list(row)
+		dic = dict(zip(keys,values))
+		user_request_list.append(dic)
+
+	conn.close()
+	return user_request_list
+
+def getAllMyRequest(name):
+	conn = sqlite3.connect('db//test.db')
+	print ("Opened database successfully")
+
+	cursor = conn.execute("SELECT * from userequest WHERE username = '%s'"% name)
+
+	keys = [tuple[0] for tuple in cursor.description]
+
+	user_request_list=[]
+	for row in cursor:
+		values = list(row)
+		dic = dict(zip(keys,values))
+		user_request_list.append(dic)
+
+	conn.close()
+	return user_request_list
+
+def getURL(ide):
+	conn = sqlite3.connect('db//test.db')
+	print ("Opened database successfully")
+
+	cursor = conn.execute("SELECT urladdress from userequest WHERE id = %d"% ide)
+
+	keys = [tuple[0] for tuple in cursor.description]
+
+	user_request_list=[]
+	for row in cursor:
+		values = list(row)
+		dic = dict(zip(keys,values))
+		user_request_list.append(dic)
+
+	conn.close()
+	return user_request_list
+
+
+
+def updateUserRequest(ide,urladdress,comentary,initial_time,final_time, status):
+	conn = sqlite3.connect('db//test.db')
+	print ("Opened database successfully")
+
+	conn.execute("UPDATE userequest set urladdress=?, commentary=?,initial_time=?,final_time=?,status=? WHERE id=? \
+	      ",(urladdress,comentary,initial_time,final_time,status,ide))
+
+	conn.commit()
+	print ("Records created successfully")
+	conn.close()

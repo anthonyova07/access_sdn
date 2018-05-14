@@ -24,6 +24,16 @@ def createDB():
 	       	external_port	TEXT,
 	       	authServer_port 	TEXT,
 	       	sdnController_ip	TEXT);''')
+
+	conn.execute('''CREATE TABLE `userequest` (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`username`	TEXT NOT NULL,
+	`urladdress`	TEXT NOT NULL,
+	`commentary`	TEXT,
+	`initial_time`	TEXT NOT NULL,
+	`final_time`	TEXT NOT NULL,
+	`status`	TEXT NOT NULL
+							);''')
 	print ("Tables created successfully");
 
 	conn.close()
