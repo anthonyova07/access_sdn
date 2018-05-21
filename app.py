@@ -51,10 +51,10 @@ def userView(user):
         usuario = str(user)
         pagina = str(request.form['urladdress'])
         commentary = str(request.form['commentary'])
-        print type(request.form)
+        print (type(request.form))
         initial_time = request.form['initial_time']
         final_time = request.form['final_time']
-        print initial_time
+        print (initial_time)
         status = "registered"
 
         dbaccess.insertUserRequest(usuario,pagina,commentary,initial_time,final_time,status)
@@ -283,13 +283,13 @@ def gen():
                 yield ev.encode()
                 while len(solicitud) > 0:
                     item = json.dumps(solicitud.pop())
-                    print item
+                    print (item)
                     ev = ServerSentEvent(str(item))
                     yield ev.encode()
             # ev = ServerSentEvent("Nadie aun")
             # return ev.encode()
         except GeneratorExit: # Or maybe use flask signals
-            print "error"
+            print ("error")
 
 @app.route("/sus")
 def subscribe():
@@ -298,7 +298,7 @@ def subscribe():
 @app.route("/set_status",methods=['GET','POST'] )
 def setStatus():
     global solicitudes
-    print "Se mando a setear el estado"
+    print ("Se mando a setear el estado")
     # pdb.set_trace()
 
     if request.method == 'POST':
@@ -309,7 +309,7 @@ def setStatus():
         final_time = request.form['final_time']
         status = str(request.form['status'])
         ide = int(request.form['id'])
-        print "El id es:" + str(ide)
+        print ("El id es:" + str(ide))
         item = {'id':ide,'username': str(usuario),'urladdress': str(pagina), 'commentary':str(commentary),'initial_time':initial_time,'final_time':final_time, 'status':status }
         dbaccess.updateUserRequest(ide,pagina,commentary,initial_time,final_time,status)
         solicitudes.append(item)
@@ -318,7 +318,7 @@ def setStatus():
         # pdb.set_trace()
         items ={'item': item, 'items':items}
         Response(items, mimetype="text/json")
-        print 'Se respondio'
+        print ('Se respondio')
     return json.dumps({"result":items})
     # return Response(items, mimetype="text/json")
 @app.route('/prueba')
