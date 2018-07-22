@@ -60,9 +60,9 @@ _dpid=0
 #server_ip_list=[{'ip:ip','mac':'mac','port':'port','server_type':server_type}]
 serv_type=['external','internal','authServer']
 
-#usingindex to get server type like as 0=external,1=internal,2=authServer
+#using index to get server type like as 0=external,1=internal,2=authServer
 server_ip_list=[]
-policy_to_server=[{'Guest':[serv_type[1]]},{'Employee':[serv_type[0],serv_type[1]]}]
+policy_to_server=[{'Guest':[ [1]]},{'Employee':[serv_type[0],serv_type[1]]}]
 #Client list dictionary
 #client_list=[{ip:ip,mac:mac,port:port,'policy_type':policy_type}]
 client_list=[]

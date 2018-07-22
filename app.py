@@ -130,11 +130,11 @@ def serverAdd():
         dbaccess.insertServertable(internal_ip,external_ip,authServer_ip,internal_mac,external_mac, \
             authServer_mac,internal_port,external_port,authServer_port,sdnController_ip)
         items = dbaccess.getServertable()
-
+##############################################################################
 
         server_config = dbaccess.getServerconfig()
         sdnController = server_config['sdnController_ip']
-        url = 'http://'+sdnController+':5010/serverconfig'
+        url = 'http://'+ +':5010/serverconfig'
         del(server_config['sdnController_ip'])
 
         sendConfig(server_config,url)
@@ -327,4 +327,4 @@ def prueba():
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8000)
+    app.run(debug=True, host='127.0.0.1', port=8000)
